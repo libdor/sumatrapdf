@@ -4,7 +4,7 @@
 /*                                                                         */
 /*    ANSI-specific FreeType low-level system interface (body).            */
 /*                                                                         */
-/*  Copyright 1996-2002, 2006, 2008-2011, 2013 by                          */
+/*  Copyright 1996-2018 by                                                 */
 /*  David Turner, Robert Wilhelm, and Werner Lemberg.                      */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */
@@ -71,7 +71,7 @@
   {
     FT_UNUSED( memory );
 
-    return ft_smalloc( size );
+    return ft_smalloc( (size_t)size );
   }
 
 
@@ -104,7 +104,7 @@
     FT_UNUSED( memory );
     FT_UNUSED( cur_size );
 
-    return ft_srealloc( block, new_size );
+    return ft_srealloc( block, (size_t)new_size );
   }
 
 
@@ -171,7 +171,7 @@
 
     stream->descriptor.pointer = NULL;
     stream->size               = 0;
-    stream->base               = 0;
+    stream->base               = NULL;
   }
 
 
@@ -212,7 +212,7 @@
     file = STREAM_FILE( stream );
 
     if ( stream->pos != offset )
-      ft_fseek( file, offset, SEEK_SET );
+      ft_fseek( file, (long)offset, SEEK_SET );
 
     return (unsigned long)ft_fread( buffer, 1, count, file );
   }
@@ -232,7 +232,7 @@
 
     stream->descriptor.pointer = NULL;
     stream->pathname.pointer   = (char*)filepathname;
-    stream->base               = 0;
+    stream->base               = NULL;
     stream->pos                = 0;
     stream->read               = NULL;
     stream->close              = NULL;
@@ -247,7 +247,7 @@
     }
 
     ft_fseek( file, 0, SEEK_END );
-    stream->size = ft_ftell( file );
+    stream->size = (unsigned long)ft_ftell( file );
     if ( !stream->size )
     {
       FT_ERROR(( "FT_Stream_Open:" ));
@@ -292,7 +292,7 @@
     memory = (FT_Memory)ft_smalloc( sizeof ( *memory ) );
     if ( memory )
     {
-      memory->user    = 0;
+      memory->user    = NULL;
       memory->alloc   = ft_alloc;
       memory->realloc = ft_realloc;
       memory->free    = ft_free;
@@ -315,29 +315,6 @@
 #endif
     ft_sfree( memory );
   }
-
-
-/* cf. http://lists.gnu.org/archive/html/freetype/2006-09/msg00036.html */
-#ifdef _WIN32
-#include <windows.h>
-
-  FT_FILE* ft_fopen_win32(const char *fname, const char *mode)
-  {
-    // First try fopen, assuming nothing about character encodings.
-    FT_FILE *file = fopen(fname, mode);
-    if (!file)
-    {
-      // fopen failed. Assume the filename is UTF-8, convert to UTF-16, and try _wfopen.
-      WCHAR fnameW[MAX_PATH], modeW[8];
-      if (MultiByteToWideChar(CP_UTF8, 0, fname, -1, fnameW, _countof(fnameW)) &&
-          MultiByteToWideChar(CP_UTF8, 0, mode, -1, modeW, _countof(modeW)))
-      {
-        file = _wfopen(fnameW, modeW);
-      }
-    }
-    return file;
-  }
-#endif
 
 
 /* END */
