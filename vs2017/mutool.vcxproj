@@ -141,10 +141,9 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4204;4100;4267;4204;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;DEBUG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;..\ext\harfbuzz\src;..\ext\freetype2\include;..\ext\freetype2\config;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -167,9 +166,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4204;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;DEBUG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;..\ext\harfbuzz\src;..\ext\freetype2\include;..\ext\freetype2\config;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -191,9 +190,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4204;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;..\ext\harfbuzz\src;..\ext\freetype2\include;..\ext\freetype2\config;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -219,9 +218,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4204;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;..\ext\harfbuzz\src;..\ext\freetype2\include;..\ext\freetype2\config;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -245,9 +244,9 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4127;4189;4324;4458;4800;28125;28252;28253;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4204;28125;28252;28253;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;..\ext\harfbuzz\src;..\ext\freetype2\include;..\ext\freetype2\config;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -274,9 +273,9 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4127;4189;4324;4458;4800;28125;28252;28253;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4127;4189;4324;4458;4800;4204;28125;28252;28253;4100;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ext\zlib;..\ext\lzma\C;..\ext\unarr;..\mupdf\include;..\ext\harfbuzz\src;..\ext\freetype2\include;..\ext\freetype2\config;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -301,23 +300,46 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\mupdf\source\cbz\mucbz.c" />
+    <ClCompile Include="..\mupdf\source\cbz\muimg.c" />
+    <ClCompile Include="..\mupdf\source\fitz\bidi-std.c" />
+    <ClCompile Include="..\mupdf\source\fitz\bidi.c" />
     <ClCompile Include="..\mupdf\source\fitz\document-all.c" />
-    <ClCompile Include="..\mupdf\source\fitz\document-no-run.c" />
+    <ClCompile Include="..\mupdf\source\fitz\harfbuzz.c" />
     <ClCompile Include="..\mupdf\source\fitz\output-pcl.c" />
     <ClCompile Include="..\mupdf\source\fitz\output-pwg.c" />
     <ClCompile Include="..\mupdf\source\fitz\stream-prog.c" />
     <ClCompile Include="..\mupdf\source\fitz\svg-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\test-device.c" />
-    <ClCompile Include="..\mupdf\source\img\muimage.c" />
-    <ClCompile Include="..\mupdf\source\tiff\mutiff.c" />
+    <ClCompile Include="..\mupdf\source\html\css-apply.c" />
+    <ClCompile Include="..\mupdf\source\html\css-parse.c" />
+    <ClCompile Include="..\mupdf\source\html\epub-doc.c" />
+    <ClCompile Include="..\mupdf\source\html\html-doc.c" />
+    <ClCompile Include="..\mupdf\source\html\html-font.c" />
+    <ClCompile Include="..\mupdf\source\html\html-layout.c" />
+    <ClCompile Include="..\mupdf\source\svg\svg-color.c" />
+    <ClCompile Include="..\mupdf\source\svg\svg-doc.c" />
+    <ClCompile Include="..\mupdf\source\svg\svg-parse.c" />
+    <ClCompile Include="..\mupdf\source\svg\svg-run.c" />
+    <ClCompile Include="..\mupdf\source\tools\cmapdump.c" />
+    <ClCompile Include="..\mupdf\source\tools\muconvert.c" />
+    <ClCompile Include="..\mupdf\source\tools\mudraw.c" />
     <ClCompile Include="..\mupdf\source\tools\mutool.c" />
+    <ClCompile Include="..\mupdf\source\tools\mutrace.c" />
     <ClCompile Include="..\mupdf\source\tools\pdfclean.c" />
+    <ClCompile Include="..\mupdf\source\tools\pdfcreate.c" />
     <ClCompile Include="..\mupdf\source\tools\pdfextract.c" />
     <ClCompile Include="..\mupdf\source\tools\pdfinfo.c" />
+    <ClCompile Include="..\mupdf\source\tools\pdfmerge.c" />
+    <ClCompile Include="..\mupdf\source\tools\pdfpages.c" />
+    <ClCompile Include="..\mupdf\source\tools\pdfportfolio.c" />
     <ClCompile Include="..\mupdf\source\tools\pdfposter.c" />
     <ClCompile Include="..\mupdf\source\tools\pdfshow.c" />
+    <ClCompile Include="..\mupdf\source\tools\pdfsign.c" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="harfbuzz.vcxproj">
+      <Project>{e014dac2-3ebf-4730-baa4-81ebc7be83c5}</Project>
+    </ProjectReference>
     <ProjectReference Include="mupdf.vcxproj">
       <Project>{2181F50F-8D95-1DC1-5617-C120C2EA19F2}</Project>
     </ProjectReference>

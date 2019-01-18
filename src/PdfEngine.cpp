@@ -5,6 +5,7 @@
 
 extern "C" {
 #include <mupdf/fitz.h>
+#include <fitz-imp.h>
 }
 
 #include "utils/BaseUtil.h"
@@ -48,10 +49,10 @@ inline bool fz_is_pt_in_rect(fz_rect rect, fz_point pt) {
 }
 
 inline float fz_calc_overlap(fz_rect r1, fz_rect r2) {
-    if (fz_is_empty_rect(&r1))
+    if (fz_is_empty_rect(r1))
         return 0.0f;
     fz_rect isect = r1;
-    fz_intersect_rect(&isect, &r2);
+    fz_intersect_rect(isect, r2);
     return (isect.x1 - isect.x0) * (isect.y1 - isect.y0) / ((r1.x1 - r1.x0) * (r1.y1 - r1.y0));
 }
 
@@ -115,9 +116,8 @@ static RenderedBitmap* new_rendered_fz_pixmap(fz_context* ctx, fz_pixmap* pixmap
         free(bmpData);
         /* BGRA is a GDI compatible format */
         fz_try(ctx) {
-            fz_irect bbox;
             fz_colorspace* colorspace = fz_device_bgr(ctx);
-            bgrPixmap = fz_new_pixmap_with_bbox(ctx, colorspace, fz_pixmap_bbox(ctx, pixmap, &bbox));
+            bgrPixmap = fz_new_pixmap_with_bbox(ctx, colorspace, fz_pixmap_bbox(ctx, pixmap), nullptr, 0);
             fz_convert_pixmap(ctx, bgrPixmap, pixmap);
         }
         fz_catch(ctx) { return nullptr; }
@@ -176,37 +176,37 @@ fz_stream* fz_open_file2(fz_context* ctx, const WCHAR* filePath) {
     return file;
 }
 
-unsigned char* fz_extract_stream_data(fz_stream* stream, size_t* cbCount) {
-    fz_seek(stream, 0, 2);
-    int fileLen = fz_tell(stream);
-    fz_seek(stream, 0, 0);
+unsigned char* fz_extract_stream_data(fz_context* ctx, fz_stream* stream, size_t* cbCount) {
+    fz_seek(ctx, stream, 0, 2);
+    int fileLen = fz_tell(ctx, stream);
+    fz_seek(ctx, stream, 0, 0);
 
-    fz_buffer* buffer = fz_read_all(stream, fileLen);
+    fz_buffer* buffer = fz_read_all(ctx, stream, fileLen);
     AssertCrash(fileLen == buffer->len);
 
     unsigned char* data = (unsigned char*)memdup(buffer->data, buffer->len);
     if (cbCount)
         *cbCount = buffer->len;
 
-    fz_drop_buffer(stream->ctx, buffer);
+    fz_drop_buffer(ctx, buffer);
 
     if (!data)
-        fz_throw(stream->ctx, FZ_ERROR_GENERIC, "OOM in fz_extract_stream_data");
+        fz_throw(ctx, FZ_ERROR_GENERIC, "OOM in fz_extract_stream_data");
     return data;
 }
 
-void fz_stream_fingerprint(fz_stream* file, unsigned char digest[16]) {
+void fz_stream_fingerprint(fz_context* ctx, fz_stream* file, unsigned char digest[16]) {
     int fileLen = -1;
     fz_buffer* buffer = nullptr;
 
-    fz_try(file->ctx) {
-        fz_seek(file, 0, 2);
-        fileLen = fz_tell(file);
-        fz_seek(file, 0, 0);
-        buffer = fz_read_all(file, fileLen);
+    fz_try(ctx) {
+        fz_seek(ctx, file, 0, 2);
+        fileLen = fz_tell(ctx, file);
+        fz_seek(ctx, file, 0, 0);
+        buffer = fz_read_all(ctx, file, fileLen);
     }
-    fz_catch(file->ctx) {
-        fz_warn(file->ctx, "couldn't read stream data, using a nullptr fingerprint instead");
+    fz_catch(ctx) {
+        fz_warn(ctx, "couldn't read stream data, using a nullptr fingerprint instead");
         ZeroMemory(digest, 16);
         return;
     }
@@ -218,7 +218,7 @@ void fz_stream_fingerprint(fz_stream* file, unsigned char digest[16]) {
     fz_md5_update(&md5, buffer->data, buffer->len);
     fz_md5_final(&md5, digest);
 
-    fz_drop_buffer(file->ctx, buffer);
+    fz_drop_buffer(ctx, buffer);
 }
 
 static inline int wchars_per_rune(int rune) {
@@ -299,7 +299,7 @@ static void AddLineSep(str::Str<WCHAR>& s, Vec<RectI>& rects, const WCHAR* lineS
     }
 }
 
-static WCHAR* fz_text_page_to_str(fz_text_page* text, const WCHAR* lineSep, RectI** coordsOut) {
+static WCHAR* fz_text_page_to_str(fz_stext_page* text, const WCHAR* lineSep, RectI** coordsOut) {
     size_t lineSepLen = str::Len(lineSep);
     str::Str<WCHAR> content;
     // coordsOut is optional but we ask for it by default so we simplify the code
@@ -775,7 +775,7 @@ static void fz_run_user_page_annots(Vec<PageAnnotation>& pageAnnots, fz_device* 
         PageAnnotation& annot = pageAnnots.at(i);
         // skip annotation if it isn't visible
         fz_rect rect = fz_RectD_to_rect(annot.rect);
-        fz_transform_rect(&rect, ctm);
+        fz_transform_rect(rect, ctm);
         fz_rect isect = rect;
         if (cliprect && fz_is_empty_rect(fz_intersect_rect(&isect, cliprect)))
             continue;
@@ -817,16 +817,16 @@ static void fz_run_user_page_annots(Vec<PageAnnotation>& pageAnnots, fz_device* 
         float color[3] = {annot.color.r / 255.f, annot.color.g / 255.f, annot.color.b / 255.f};
         if (PageAnnotType::Highlight == annot.type) {
             // render path with transparency effect
-            fz_begin_group(dev, &rect, 0, 0, FZ_BLEND_MULTIPLY, 1.f);
+            fz_begin_group(dev->ctx, dev, rect, 0, 0, FZ_BLEND_MULTIPLY, 1.f);
             fz_fill_path(dev, path, 0, ctm, cs, color, annot.color.a / 255.f);
             fz_end_group(dev);
         } else {
             if (!stroke)
                 stroke = fz_new_stroke_state(dev->ctx);
-            fz_stroke_path(dev, path, stroke, ctm, cs, color, 1.0f);
+            fz_stroke_path(dev->ctx, dev, path, stroke, ctm, cs, color, 1.0f);
             fz_drop_stroke_state(dev->ctx, stroke);
         }
-        fz_free_path(dev->ctx, path);
+        fz_drop_path(dev->ctx, path);
     }
 }
 
@@ -892,7 +892,7 @@ pdf_obj* pdf_copy_str_dict(pdf_document* doc, pdf_obj* dict) {
 
 // Note: make sure to only call with ctxAccess
 fz_outline* pdf_loadattachments(pdf_document* doc) {
-    pdf_obj* dict = pdf_load_name_tree(doc, "EmbeddedFiles");
+    pdf_obj* dict = pdf_load_name_tree(doc->ctx, doc, "EmbeddedFiles");
     if (!dict)
         return nullptr;
 
@@ -1373,9 +1373,9 @@ PdfEngineImpl::~PdfEngineImpl() {
         DropPageRun(runCache.Last(), true);
     }
 
-    pdf_close_document(_doc);
+    pdf_drop_document(ctx, _doc);
     _doc = nullptr;
-    fz_free_context(ctx);
+    fz_drop_context(ctx);
     ctx = nullptr;
 
     free(_mediaboxes);
@@ -1492,7 +1492,7 @@ OpenEmbeddedFile:
     fz_always(ctx) { fz_drop_buffer(ctx, buffer); }
     fz_catch(ctx) { return false; }
 
-    pdf_close_document(_doc);
+    pdf_drop_document(ctx, _doc);
     _doc = nullptr;
 
     goto OpenEmbeddedFile;
@@ -1539,7 +1539,7 @@ bool PdfEngineImpl::LoadFromStream(fz_stream* stm, PasswordUI* pwdUI) {
         return false;
 
     unsigned char digest[16 + 32] = {0};
-    fz_stream_fingerprint(_doc->file, digest);
+    fz_stream_fingerprint(ctx, _doc->file, digest);
 
     bool ok = false, saveKey = false;
     while (!ok) {
@@ -2247,8 +2247,8 @@ WCHAR* PdfEngineImpl::ExtractPageText(pdf_page* page, const WCHAR* lineSep, Rect
     if (!page)
         return nullptr;
 
-    fz_text_sheet* sheet = nullptr;
-    fz_text_page* text = nullptr;
+    fz_stext_sheet* sheet = nullptr;
+    fz_stext_page* text = nullptr;
     fz_device* dev = nullptr;
     fz_var(sheet);
     fz_var(text);
@@ -2260,8 +2260,8 @@ WCHAR* PdfEngineImpl::ExtractPageText(pdf_page* page, const WCHAR* lineSep, Rect
         dev = fz_new_text_device(ctx, sheet, text);
     }
     fz_catch(ctx) {
-        fz_free_text_page(ctx, text);
-        fz_free_text_sheet(ctx, sheet);
+        fz_drop_stext_page(ctx, text);
+        fz_drop_stext_sheet(ctx, sheet);
         LeaveCriticalSection(&ctxAccess);
         return nullptr;
     }
@@ -2280,8 +2280,8 @@ WCHAR* PdfEngineImpl::ExtractPageText(pdf_page* page, const WCHAR* lineSep, Rect
     WCHAR* content = nullptr;
     if (ok)
         content = fz_text_page_to_str(text, lineSep, coordsOut);
-    fz_free_text_page(ctx, text);
-    fz_free_text_sheet(ctx, sheet);
+    fz_drop_stext_page(ctx, text);
+    fz_drop_stext_sheet(ctx, sheet);
 
     return content;
 }
@@ -2588,7 +2588,7 @@ PageLayoutType PdfEngineImpl::PreferredLayout() {
 u8* PdfEngineImpl::GetFileData(size_t* cbCount) {
     u8* res = nullptr;
     ScopedCritSec scope(&ctxAccess);
-    fz_try(ctx) { res = fz_extract_stream_data(_doc->file, cbCount); }
+    fz_try(ctx) { res = fz_extract_stream_data(ctx, _doc->file, cbCount); }
     fz_catch(ctx) {
         res = nullptr;
         if (FileName()) {
@@ -3833,28 +3833,28 @@ WCHAR* XpsEngineImpl::ExtractPageText(xps_page* page, const WCHAR* lineSep, Rect
     if (!page)
         return nullptr;
 
-    fz_text_sheet* sheet = nullptr;
-    fz_text_page* text = nullptr;
+    fz_stext_sheet* sheet = nullptr;
+    fz_stext_page* text = nullptr;
     fz_device* dev = nullptr;
     fz_var(sheet);
     fz_var(text);
 
     EnterCriticalSection(&ctxAccess);
     fz_try(ctx) {
-        sheet = fz_new_text_sheet(ctx);
-        text = fz_new_text_page(ctx);
-        dev = fz_new_text_device(ctx, sheet, text);
+        sheet = fz_new_stext_sheet(ctx);
+        text = fz_new_stext_page(ctx);
+        dev = fz_new_stext_device(ctx, sheet, text);
     }
     fz_catch(ctx) {
-        fz_free_text_page(ctx, text);
-        fz_free_text_sheet(ctx, sheet);
+        fz_drop_stext_page(ctx, text);
+        fz_drop_stext_sheet(ctx, sheet);
         LeaveCriticalSection(&ctxAccess);
         return nullptr;
     }
     LeaveCriticalSection(&ctxAccess);
 
     if (!cacheRun)
-        fz_enable_device_hints(dev, FZ_NO_CACHE);
+        fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 
     // use an infinite rectangle as bounds (instead of a mediabox) to ensure that
     // the extracted text is consistent between cached runs using a list device and
@@ -3864,8 +3864,8 @@ WCHAR* XpsEngineImpl::ExtractPageText(xps_page* page, const WCHAR* lineSep, Rect
     ScopedCritSec scope(&ctxAccess);
 
     WCHAR* content = fz_text_page_to_str(text, lineSep, coordsOut);
-    fz_free_text_page(ctx, text);
-    fz_free_text_sheet(ctx, sheet);
+    fz_drop_stext_page(ctx, text);
+    fz_drop_stext_sheet(ctx, sheet);
 
     return content;
 }
@@ -3873,7 +3873,7 @@ WCHAR* XpsEngineImpl::ExtractPageText(xps_page* page, const WCHAR* lineSep, Rect
 u8* XpsEngineImpl::GetFileData(size_t* cbCount) {
     u8* res = nullptr;
     ScopedCritSec scope(&ctxAccess);
-    fz_try(ctx) { res = fz_extract_stream_data(_docStream, cbCount); }
+    fz_try(ctx) { res = fz_extract_stream_data(ctx, _docStream, cbCount); }
     fz_catch(ctx) {
         res = nullptr;
         if (FileName()) {

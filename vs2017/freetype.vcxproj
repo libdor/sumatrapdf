@@ -135,7 +135,6 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4127;4189;4324;4458;4800;4018;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;DEBUG;FT2_BUILD_LIBRARY;FT_OPTION_AUTOFIT2;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\ext\freetype2\config;..\ext\freetype2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -299,7 +298,6 @@
     <ClCompile Include="..\ext\freetype2\src\base\ftsynth.c" />
     <ClCompile Include="..\ext\freetype2\src\base\ftsystem.c" />
     <ClCompile Include="..\ext\freetype2\src\base\fttype1.c" />
-    <ClCompile Include="..\ext\freetype2\src\base\ftxf86.c" />
     <ClCompile Include="..\ext\freetype2\src\cff\cff.c" />
     <ClCompile Include="..\ext\freetype2\src\cid\type1cid.c" />
     <ClCompile Include="..\ext\freetype2\src\gzip\ftgzip.c" />

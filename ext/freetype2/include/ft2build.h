@@ -34,6 +34,9 @@
 #ifndef FT2BUILD_H_
 #define FT2BUILD_H_
 
+#define FT_CONFIG_CONFIG_H  <sumatrapdf_ftoption.h>
+#define FT_CONFIG_MODULES_H <sumatrapdf_ftmodule.h>
+
 #include <freetype/config/ftheader.h>
 
 #endif /* FT2BUILD_H_ */

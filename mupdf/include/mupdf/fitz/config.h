@@ -80,7 +80,7 @@
 /* #define TOFU_SIL */
 
 /* To skip the ICC profiles, enable: */
-/* #define NO_ICC */
+#define NO_ICC
 
 /* To skip the Base14 fonts, enable: */
 /* #define TOFU_BASE14 */
@@ -152,7 +152,7 @@
 #endif /* FZ_ENABLE_JPX */
 
 #ifndef FZ_ENABLE_JS
-#define FZ_ENABLE_JS 1
+#define FZ_ENABLE_JS 0
 #endif /* FZ_ENABLE_JS */
 
 /* If Epub and HTML are both disabled, disable SIL fonts */

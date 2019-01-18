@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -75,6 +75,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="bin2coff.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -135,10 +136,9 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4127;4189;4324;4458;4800;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;DEBUG;USE_JPIP;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;DEBUG;USE_JPIP;OPJ_STATIC;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;..\ext\harfbuzz\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -160,8 +160,8 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4127;4189;4324;4458;4800;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;DEBUG;USE_JPIP;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;DEBUG;USE_JPIP;OPJ_STATIC;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;..\ext\harfbuzz\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -182,8 +182,8 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4127;4189;4324;4458;4800;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;USE_JPIP;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;USE_JPIP;OPJ_STATIC;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;..\ext\harfbuzz\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -208,8 +208,8 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4127;4189;4324;4458;4800;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;USE_JPIP;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;USE_JPIP;OPJ_STATIC;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;..\ext\harfbuzz\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -232,8 +232,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4127;4189;4324;4458;4800;28125;28252;28253;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;USE_JPIP;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;USE_JPIP;OPJ_STATIC;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;..\ext\harfbuzz\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -260,7 +260,7 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4127;4189;4324;4458;4800;28125;28252;28253;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>WIN32;_WIN32;_CRT_SECURE_NO_WARNINGS;WINVER=0x0501;_WIN32_WINNT=0x0501;NDEBUG;USE_JPIP;OPJ_EXPORTS;NOCJKFONT;SHARE_JPEG;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\mupdf\scripts\openjpeg;..\mupdf\include;..\mupdf\generated;..\ext\zlib;..\ext\freetype2\config;..\ext\freetype2\include;..\ext\jbig2dec;..\ext\libjpeg-turbo;..\ext\openjpeg\src\lib\openjp2;..\ext\harfbuzz\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -282,10 +282,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\mupdf\source\fitz\archive.c" />
     <ClCompile Include="..\mupdf\source\fitz\bbox-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\bitmap.c" />
     <ClCompile Include="..\mupdf\source\fitz\buffer.c" />
+    <ClCompile Include="..\mupdf\source\fitz\color-icc-create.c" />
     <ClCompile Include="..\mupdf\source\fitz\colorspace.c" />
+    <ClCompile Include="..\mupdf\source\fitz\compress.c" />
     <ClCompile Include="..\mupdf\source\fitz\compressed-buffer.c" />
     <ClCompile Include="..\mupdf\source\fitz\context.c" />
     <ClCompile Include="..\mupdf\source\fitz\crypt-aes.c" />
@@ -293,15 +296,18 @@
     <ClCompile Include="..\mupdf\source\fitz\crypt-md5.c" />
     <ClCompile Include="..\mupdf\source\fitz\crypt-sha2.c" />
     <ClCompile Include="..\mupdf\source\fitz\device.c" />
+    <ClCompile Include="..\mupdf\source\fitz\directory.c" />
     <ClCompile Include="..\mupdf\source\fitz\document.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-affine.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-blend.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-edge.c" />
+    <ClCompile Include="..\mupdf\source\fitz\draw-edgebuffer.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-glyph.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-mesh.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-paint.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-path.c" />
+    <ClCompile Include="..\mupdf\source\fitz\draw-rasterize.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-scale-simple.c" />
     <ClCompile Include="..\mupdf\source\fitz\draw-unpack.c" />
     <ClCompile Include="..\mupdf\source\fitz\error.c" />
@@ -313,9 +319,10 @@
     <ClCompile Include="..\mupdf\source\fitz\filter-leech.c" />
     <ClCompile Include="..\mupdf\source\fitz\filter-lzw.c" />
     <ClCompile Include="..\mupdf\source\fitz\filter-predict.c" />
+    <ClCompile Include="..\mupdf\source\fitz\filter-sgi.c" />
+    <ClCompile Include="..\mupdf\source\fitz\filter-thunder.c" />
     <ClCompile Include="..\mupdf\source\fitz\font.c" />
     <ClCompile Include="..\mupdf\source\fitz\ftoa.c" />
-    <ClCompile Include="..\mupdf\source\fitz\function.c" />
     <ClCompile Include="..\mupdf\source\fitz\geometry.c" />
     <ClCompile Include="..\mupdf\source\fitz\getopt.c" />
     <ClCompile Include="..\mupdf\source\fitz\glyph.c" />
@@ -324,43 +331,64 @@
     <ClCompile Include="..\mupdf\source\fitz\image.c" />
     <ClCompile Include="..\mupdf\source\fitz\link.c" />
     <ClCompile Include="..\mupdf\source\fitz\list-device.c" />
+    <ClCompile Include="..\mupdf\source\fitz\load-bmp.c" />
+    <ClCompile Include="..\mupdf\source\fitz\load-gif.c" />
     <ClCompile Include="..\mupdf\source\fitz\load-jpeg.c" />
     <ClCompile Include="..\mupdf\source\fitz\load-jpx.c" />
     <ClCompile Include="..\mupdf\source\fitz\load-jxr.c" />
     <ClCompile Include="..\mupdf\source\fitz\load-png.c" />
+    <ClCompile Include="..\mupdf\source\fitz\load-pnm.c" />
     <ClCompile Include="..\mupdf\source\fitz\load-tiff.c" />
     <ClCompile Include="..\mupdf\source\fitz\memory.c" />
+    <ClCompile Include="..\mupdf\source\fitz\noto.c" />
     <ClCompile Include="..\mupdf\source\fitz\outline.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-cbz.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-pclm.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-png.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-pnm.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-ps.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-psd.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-svg.c" />
+    <ClCompile Include="..\mupdf\source\fitz\output-tga.c" />
     <ClCompile Include="..\mupdf\source\fitz\output.c" />
     <ClCompile Include="..\mupdf\source\fitz\path.c" />
     <ClCompile Include="..\mupdf\source\fitz\pixmap.c" />
+    <ClCompile Include="..\mupdf\source\fitz\pool.c" />
     <ClCompile Include="..\mupdf\source\fitz\printf.c" />
+    <ClCompile Include="..\mupdf\source\fitz\random.c" />
+    <ClCompile Include="..\mupdf\source\fitz\separation.c" />
     <ClCompile Include="..\mupdf\source\fitz\shade.c" />
     <ClCompile Include="..\mupdf\source\fitz\stext-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\stext-output.c" />
-    <ClCompile Include="..\mupdf\source\fitz\stext-paragraph.c" />
     <ClCompile Include="..\mupdf\source\fitz\stext-search.c" />
     <ClCompile Include="..\mupdf\source\fitz\store.c" />
     <ClCompile Include="..\mupdf\source\fitz\stream-open.c" />
     <ClCompile Include="..\mupdf\source\fitz\stream-read.c" />
     <ClCompile Include="..\mupdf\source\fitz\string.c" />
-    <ClCompile Include="..\mupdf\source\fitz\strtod.c" />
+    <ClCompile Include="..\mupdf\source\fitz\strtof.c" />
     <ClCompile Include="..\mupdf\source\fitz\text.c" />
     <ClCompile Include="..\mupdf\source\fitz\time.c" />
     <ClCompile Include="..\mupdf\source\fitz\trace-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\transition.c" />
     <ClCompile Include="..\mupdf\source\fitz\tree.c" />
     <ClCompile Include="..\mupdf\source\fitz\ucdn.c" />
+    <ClCompile Include="..\mupdf\source\fitz\untar.c" />
     <ClCompile Include="..\mupdf\source\fitz\unzip.c" />
+    <ClCompile Include="..\mupdf\source\fitz\util.c" />
+    <ClCompile Include="..\mupdf\source\fitz\writer.c" />
     <ClCompile Include="..\mupdf\source\fitz\xml.c" />
-    <ClCompile Include="..\mupdf\source\pdf\js\pdf-js-none.c" />
-    <ClCompile Include="..\mupdf\source\pdf\pdf-annot-edit.c" />
+    <ClCompile Include="..\mupdf\source\fitz\zip.c" />
+    <ClCompile Include="..\mupdf\source\gprf\gprf-doc.c" />
+    <ClCompile Include="..\mupdf\source\gprf\gprf-skeleton.c" />
+    <ClCompile Include="..\mupdf\source\helpers\mu-threads\mu-threads.c" />
+    <ClCompile Include="..\mupdf\source\helpers\pkcs7\pkcs7-check.c" />
+    <ClCompile Include="..\mupdf\source\helpers\pkcs7\pkcs7-openssl.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-annot.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-appearance.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-clean-file.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-clean.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-cmap-load.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-cmap-parse.c" />
-    <ClCompile Include="..\mupdf\source\pdf\pdf-cmap-table.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-cmap.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-colorspace.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-crypt.c" />
@@ -369,13 +397,15 @@
     <ClCompile Include="..\mupdf\source\pdf\pdf-event.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-field.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-font.c" />
-    <ClCompile Include="..\mupdf\source\pdf\pdf-fontfile.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-form.c" />
-    <ClCompile Include="..\mupdf\source\pdf\pdf-ft-tools.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-function.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-graft.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-image.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-interpret.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-js.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-layer.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-lex.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-link.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-metrics.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-nametree.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-object.c" />
@@ -386,42 +416,31 @@
     <ClCompile Include="..\mupdf\source\pdf\pdf-page.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-parse.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-pattern.c" />
-    <ClCompile Include="..\mupdf\source\pdf\pdf-pkcs7.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-portfolio.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-repair.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-resources.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-run.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-shade.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-signature.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-store.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-stream.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-type3.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-unicode.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-write.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-xobject.c" />
-    <ClCompile Include="..\mupdf\source\pdf\pdf-xref-aux.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-xref.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-common.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-doc.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-glyphs.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-gradient.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-image.c" />
+    <ClCompile Include="..\mupdf\source\xps\xps-link.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-outline.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-path.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-resource.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-tile.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-util.c" />
     <ClCompile Include="..\mupdf\source\xps\xps-zip.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="..\mupdf\font_base14.asm">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\bin\nasm.exe -f win32 -I ../mupdf/ -o "$(IntDir)/%(Filename).obj" "%(Identity)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\bin\nasm.exe -f win32 -I ../mupdf/ -o "$(IntDir)/%(Filename).obj" "%(Identity)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='ReleasePrefast|Win32'">..\bin\nasm.exe -f win32 -I ../mupdf/ -o "$(IntDir)/%(Filename).obj" "%(Identity)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\bin\nasm.exe -f win64 -DWIN64 -I ../mupdf/ -o "$(IntDir)/%(Filename).obj" "%(Identity)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\bin\nasm.exe -f win64 -DWIN64 -I ../mupdf/ -o "$(IntDir)/%(Filename).obj" "%(Identity)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='ReleasePrefast|x64'">..\bin\nasm.exe -f win64 -DWIN64 -I ../mupdf/ -o "$(IntDir)/%(Filename).obj" "%(Identity)"</Command>
-      <Outputs>$(IntDir)/%(Filename).obj</Outputs>
-      <Message>Compiling %(Identity)</Message>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="zlib.vcxproj">
@@ -439,8 +458,162 @@
     <ProjectReference Include="openjpeg.vcxproj">
       <Project>{FDC4548D-E991-AF98-12AB-9D40FED6E426}</Project>
     </ProjectReference>
+    <ProjectReference Include="bin2coff.vcxproj">
+      <Project>{bfe316b3-bd90-433a-a20d-c73975f1caa7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\droid\DroidSansFallback.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\droid\DroidSansFallbackFull.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoEmoji-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoKufiArabic-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoNaskhArabic-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoNastaliqUrdu-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansJavanese-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansMongolian-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansOriya-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansSyriacEastern-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansSyriacEstrangela-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansSyriacWestern-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansTaiTham-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansThaana-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSansTibetan-Regular.ttf" />
+    <bin2coff__ttf_ Include="..\mupdf\resources\fonts\noto\NotoSerifTelugu-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <bin2coff__ttc_ Include="..\mupdf\resources\fonts\han\SourceHanSerif-Regular.ttc" />
+  </ItemGroup>
+  <ItemGroup>
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSans-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansAdlam-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansAhom-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansAnatolianHieroglyphs-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansArabic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansAvestan-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBamum-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBassaVah-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBatak-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBengali-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBhaiksuki-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBrahmi-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBuginese-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansBuhid-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansCanadianAboriginal-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansCarian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansChakma-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansCham-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansCherokee-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansCoptic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansCuneiform-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansCypriot-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansDeseret-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansDevanagari-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansEgyptianHieroglyphs-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansElbasan-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansGlagolitic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansGothic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansHanunoo-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansHatran-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansImperialAramaic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansInscriptionalPahlavi-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansInscriptionalParthian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansKaithi-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansKayahLi-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansKharoshthi-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansLepcha-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansLimbu-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansLinearA-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansLinearB-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansLisu-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansLycian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansLydian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMalayalam-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMandaic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansManichaean-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMarchen-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMeeteiMayek-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMendeKikakui-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMeroitic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMiao-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMro-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansMultani-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansNabataean-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansNewa-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansNewTaiLue-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansNKo-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOgham-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOlChiki-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOldItalic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOldNorthArabian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOldPermic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOldPersian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOldSouthArabian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOldTurkic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOsage-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansOsmanya-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansPahawhHmong-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansPalmyrene-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansPauCinHau-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansPhagsPa-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansPhoenician-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansRejang-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansRunic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSamaritan-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSaurashtra-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSharada-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansShavian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSoraSompeng-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSundanese-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSylotiNagri-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSymbols-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansSymbols2-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansTagalog-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansTagbanwa-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansTaiLe-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansTaiViet-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansTifinagh-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansUgaritic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansVai-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSansYi-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerif-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifArmenian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifBalinese-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifEthiopic-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifGeorgian-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifGujarati-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifGurmukhi-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifHebrew-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifKannada-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifKhmer-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifLao-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifMyanmar-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifSinhala-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifTamil-Regular.otf" />
+    <bin2coff__otf_ Include="..\mupdf\resources\fonts\noto\NotoSerifThai-Regular.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\sil\CharisSIL-B.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\sil\CharisSIL-BI.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\sil\CharisSIL-I.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\sil\CharisSIL-R.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\Dingbats.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusMonoPS-Bold.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusMonoPS-BoldItalic.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusMonoPS-Italic.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusMonoPS-Regular.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusRoman-Bold.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusRoman-BoldItalic.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusRoman-Italic.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusRoman-Regular.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusSans-Bold.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusSans-BoldItalic.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusSans-Italic.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\NimbusSans-Regular.cff" />
+    <bin2coff__cff_ Include="..\mupdf\resources\fonts\urw\StandardSymbolsPS.cff" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="bin2coff.targets" />
   </ImportGroup>
 </Project>

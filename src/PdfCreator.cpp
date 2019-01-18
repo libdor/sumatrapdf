@@ -6,6 +6,7 @@
 extern "C" {
 #include <mupdf/pdf.h>
 #include <zlib.h>
+#include <fitz-imp.h>
 }
 
 #include "utils/BaseUtil.h"
@@ -95,12 +96,12 @@ static fz_image* render_to_pixmap(fz_context* ctx, HBITMAP hbmp, SizeI size) {
     }
     fz_always(ctx) { fz_free(ctx, data); }
     fz_catch(ctx) {
-        fz_free_compressed_buffer(ctx, buf);
+        fz_drop_compressed_buffer(ctx, buf);
         fz_rethrow(ctx);
     }
 
     fz_colorspace* cs = is_grayscale ? fz_device_gray(ctx) : fz_device_rgb(ctx);
-    return fz_new_image(ctx, w, h, 8, cs, 96, 96, 0, 0, nullptr, nullptr, buf, nullptr);
+    return fz_new_image_from_compressed_buffer(ctx, w, h, 8, cs, 96, 96, 0, 0, nullptr, nullptr, buf, nullptr);
 }
 
 static fz_image* pack_jpeg(fz_context* ctx, const char* data, size_t len, SizeI size) {
@@ -115,11 +116,11 @@ static fz_image* pack_jpeg(fz_context* ctx, const char* data, size_t len, SizeI 
         buf->params.u.jpeg.color_transform = -1;
     }
     fz_catch(ctx) {
-        fz_free_compressed_buffer(ctx, buf);
+        fz_drop_compressed_buffer(ctx, buf);
         fz_rethrow(ctx);
     }
 
-    return fz_new_image(ctx, size.dx, size.dy, 8, fz_device_rgb(ctx), 96, 96, 0, 0, nullptr, nullptr, buf, nullptr);
+    return fz_new_image_from_compressed_buffer(ctx, size.dx, size.dy, 8, fz_device_rgb(ctx), 96, 96, 0, 0, nullptr, nullptr, buf, nullptr);
 }
 
 static fz_image* pack_jp2(fz_context* ctx, const char* data, size_t len, SizeI size) {
@@ -133,11 +134,11 @@ static fz_image* pack_jp2(fz_context* ctx, const char* data, size_t len, SizeI s
         buf->params.type = FZ_IMAGE_JPX;
     }
     fz_catch(ctx) {
-        fz_free_compressed_buffer(ctx, buf);
+        fz_drop_compressed_buffer(ctx, buf);
         fz_rethrow(ctx);
     }
 
-    return fz_new_image(ctx, size.dx, size.dy, 8, fz_device_rgb(ctx), 96, 96, 0, 0, nullptr, nullptr, buf, nullptr);
+    return fz_new_image_from_compressed_buffer(ctx, size.dx, size.dy, 8, fz_device_rgb(ctx), 96, 96, 0, 0, nullptr, nullptr, buf, nullptr);
 }
 
 PdfCreator::PdfCreator() {
@@ -149,8 +150,8 @@ PdfCreator::PdfCreator() {
 }
 
 PdfCreator::~PdfCreator() {
-    pdf_close_document(doc);
-    fz_free_context(ctx);
+    pdf_drop_document(ctx, doc);
+    fz_drop_context(ctx);
 }
 
 bool PdfCreator::AddImagePage(fz_image* image, float imgDpi) {
@@ -167,16 +168,16 @@ bool PdfCreator::AddImagePage(fz_image* image, float imgDpi) {
         float zoom = imgDpi ? 72 / imgDpi : 1.0f;
         fz_matrix ctm = {image->w * zoom, 0, 0, image->h * zoom, 0, 0};
         fz_rect bounds = fz_unit_rect;
-        fz_transform_rect(&bounds, &ctm);
+        fz_transform_rect(bounds, ctm);
         page = pdf_create_page(doc, bounds, 72, 0);
         dev = pdf_page_write(doc, page);
-        fz_fill_image(dev, image, &ctm, 1.0);
-        fz_free_device(dev);
+        fz_fill_image(ctx, dev, image, ctm, 1.0, NULL);
+        fz_drop_device(ctx, dev);
         dev = nullptr;
-        pdf_insert_page(doc, page, INT_MAX);
+        pdf_insert_page(ctx, doc, INT_MAX, page);
     }
     fz_always(ctx) {
-        fz_free_device(dev);
+        fz_drop_device(ctx, dev);
         pdf_free_page(doc, page);
     }
     fz_catch(ctx) { return false; }
@@ -276,16 +277,16 @@ bool PdfCreator::SetProperty(DocumentProperty prop, const WCHAR* value) {
     pdf_obj* obj = nullptr;
     fz_var(obj);
     fz_try(ctx) {
-        pdf_obj* info = pdf_dict_getp(pdf_trailer(doc), "Info");
-        if (!pdf_is_indirect(info) || !pdf_is_dict(info)) {
-            info = obj = pdf_new_dict(doc, 4);
-            pdf_dict_puts_drop(pdf_trailer(doc), "Info", pdf_new_ref(doc, obj));
-            pdf_drop_obj(obj);
+        pdf_obj* info = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Info");
+        if (!pdf_is_indirect(ctx, info) || !pdf_is_dict(ctx, info)) {
+            info = obj = pdf_new_dict(ctx, doc, 4);
+            pdf_dict_puts_drop(ctx, pdf_trailer(ctx, doc), "Info", pdf_new_ref(doc, obj));
+            pdf_drop_obj(ctx, obj);
         }
-        pdf_dict_puts_drop(info, name, pdf_new_string(doc, encValue, encValueLen));
+        pdf_dict_puts_drop(ctx, info, name, pdf_new_string(ctx, encValue, encValueLen));
     }
     fz_catch(ctx) {
-        pdf_drop_obj(obj);
+        pdf_drop_obj(ctx, obj);
         return false;
     }
     return true;
@@ -312,7 +313,7 @@ bool PdfCreator::SaveToFile(const char* filePath) {
     if (gPdfProducer)
         SetProperty(DocumentProperty::PdfProducer, gPdfProducer);
 
-    fz_try(ctx) { pdf_write_document(doc, const_cast<char*>(filePath), nullptr); }
+    fz_try(ctx) { pdf_write_document(ctx, doc, const_cast<char*>(filePath), nullptr); }
     fz_catch(ctx) { return false; }
     return true;
 }

@@ -78,9 +78,6 @@
     <ClCompile Include="..\ext\freetype2\src\base\fttype1.c">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\ext\freetype2\src\base\ftxf86.c">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\ext\freetype2\src\cff\cff.c">
       <Filter>cff</Filter>
     </ClCompile>
